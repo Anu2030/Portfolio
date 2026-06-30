@@ -1,0 +1,203 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #000;
+  font-family: 'VT323', monospace;
+  overflow: hidden;
+}
+
+/* ---------- ROOM ---------- */
+.room-wrap {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.room-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: pixelated;
+}
+
+.monitor-hotspot {
+  position: absolute;
+  left: 51.9%;
+  top: 46.5%;
+  width: 14.2%;
+  height: 11.5%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.monitor-hotspot:hover {
+  box-shadow: 0 0 25px 6px rgba(120, 220, 255, 0.55) inset;
+}
+
+.hint {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  animation: blink 1.6s infinite;
+  pointer-events: none;
+}
+
+@keyframes blink { 50% { opacity: 0.15; } }
+
+/* ---------- OS OVERLAY ---------- */
+.os {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 50;
+}
+
+.hidden { display: none !important; }
+
+.crt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0c1420;
+  overflow: hidden;
+  animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.02); }
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.18) 0px,
+    rgba(0,0,0,0.18) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  z-index: 99;
+  mix-blend-mode: multiply;
+}
+
+/* boot text */
+.boot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7CFC9B;
+}
+#bootText {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  white-space: pre-wrap;
+}
+
+/* desktop */
+.desktop {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, #163049 0%, #081522 100%);
+  color: #d7f7ff;
+  position: relative;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: #0a1a28;
+  border-bottom: 2px solid #2bd4ff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+}
+
+.close-btn {
+  background: #ff3b5c;
+  border: none;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 90px);
+  gap: 22px;
+  padding: 30px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon:hover { background: rgba(43,212,255,0.15); }
+
+.icon-img { font-size: 32px; }
+
+.icon span {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  text-align: center;
+  color: #d7f7ff;
+}
+
+/* windows */
+.window {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 86vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #0d1b29;
+  border: 2px solid #2bd4ff;
+  box-shadow: 0 0 25px rgba(43,212,255,0.35);
+  z-index: 60;
+}
+
+.win-title {
+  background: #2bd4ff;
+  color: #06121c;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.win-close { cursor: pointer; }
+
+.win-body {
+  padding: 16px 18px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.win-body a { color: #7cfc9b; }
+
+.proj-list li { margin-bottom: 14px; list-style: none; }
+
+#clock { font-family: 'Press Start 2P', monospace; font-size: 11px; }
