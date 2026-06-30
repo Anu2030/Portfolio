@@ -13,7 +13,7 @@ const bootLines = [
   "Loading caffeine.exe.... OK",
   "Mounting portfolio/...... OK",
   "",
-  "Welcome back, An.",
+  "Welcome back, Anoushka.",
 ];
 
 monitorBtn.addEventListener('click', () => {
