@@ -43,7 +43,7 @@ body {
   transform: translateX(-50%);
   color: #fff;
   font-family: 'Press Start 2P', monospace;
-  font-size: 12px;
+  font-size: clamp(8px, 2vw, 12px);
   letter-spacing: 1px;
   opacity: 0.7;
   animation: blink 1.6s infinite;
@@ -102,8 +102,9 @@ body {
 }
 #bootText {
   font-family: 'VT323', monospace;
-  font-size: 22px;
+  font-size: clamp(16px, 4vw, 22px);
   white-space: pre-wrap;
+  padding: 0 20px;
 }
 
 /* desktop */
@@ -119,11 +120,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 14px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 14px);
   background: #0a1a28;
   border-bottom: 2px solid #2bd4ff;
   font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-size: clamp(8px, 1.5vw, 11px);
+  gap: 10px;
 }
 
 .close-btn {
@@ -131,34 +133,35 @@ body {
   border: none;
   color: #fff;
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: clamp(8px, 1.2vw, 10px);
+  padding: clamp(3px, 0.8vw, 4px) clamp(6px, 1.2vw, 8px);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .icons {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 90px);
-  gap: 22px;
-  padding: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(70px, 15vw, 100px), 1fr));
+  gap: clamp(16px, 3vw, 22px);
+  padding: clamp(16px, 4vw, 30px);
 }
 
 .icon {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: clamp(4px, 1vw, 6px);
   cursor: pointer;
-  padding: 8px;
+  padding: clamp(4px, 1vw, 8px);
 }
 
 .icon:hover { background: rgba(43,212,255,0.15); }
 
-.icon-img { font-size: 32px; }
+.icon-img { font-size: clamp(24px, 5vw, 32px); }
 
 .icon span {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 1.2vw, 9px);
   text-align: center;
   color: #d7f7ff;
 }
@@ -166,11 +169,11 @@ body {
 /* windows */
 .window {
   position: absolute;
-  top: 18%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: min(560px, 86vw);
-  max-height: 70vh;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 560px);
+  max-height: clamp(60vh, 80vh, 90vh);
   overflow-y: auto;
   background: #0d1b29;
   border: 2px solid #2bd4ff;
@@ -182,17 +185,20 @@ body {
   background: #2bd4ff;
   color: #06121c;
   font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
-  padding: 8px 10px;
+  font-size: clamp(9px, 1.5vw, 11px);
+  padding: clamp(6px, 1vw, 8px) clamp(8px, 1.5vw, 10px);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .win-close { cursor: pointer; }
 
 .win-body {
-  padding: 16px 18px;
-  font-size: 20px;
+  padding: clamp(12px, 2vw, 16px) clamp(14px, 2.5vw, 18px);
+  font-size: clamp(14px, 2vw, 20px);
   line-height: 1.5;
 }
 
@@ -200,4 +206,91 @@ body {
 
 .proj-list li { margin-bottom: 14px; list-style: none; }
 
-#clock { font-family: 'Press Start 2P', monospace; font-size: 11px; }
+#clock { font-family: 'Press Start 2P', monospace; font-size: clamp(8px, 1.5vw, 11px); }
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Ultra small devices (mobile phones) */
+@media (max-width: 320px) {
+  .icons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .monitor-hotspot {
+    width: 16%;
+    height: 13%;
+  }
+}
+
+/* Small devices (phones to tablets) */
+@media (max-width: 480px) {
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .topbar span:nth-child(2) {
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .window {
+    width: 95vw;
+    max-height: 85vh;
+  }
+  
+  .icons {
+    grid-template-columns: repeat(3, 1fr);
+    padding: clamp(12px, 3vw, 20px);
+    gap: clamp(12px, 2vw, 16px);
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .icons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .window {
+    width: 92vw;
+  }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 769px) {
+  .icons {
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) {
+  .icons {
+    gap: clamp(10px, 2vw, 16px);
+    padding: clamp(8px, 2vh, 16px);
+  }
+  
+  .window {
+    max-height: 95vh;
+    top: 50% !important;
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High resolution displays */
+@media (min-width: 1600px) {
+  .icons {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
